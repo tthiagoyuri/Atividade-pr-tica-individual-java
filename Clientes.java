@@ -17,16 +17,16 @@ class Cliente extends Thread {
 
     @Override
     public void run() {
-        boolean comprou = false;
-        while (true) {
-            double valorCompra = VALORES_COMPRA[random.nextInt(VALORES_COMPRA.length)]; 
-            if (conta.getSaldo() >= valorCompra) {
-                comprou = true;
-                for (Loja loja : lojas) {
-                    synchronized (loja.getConta()) {
-                        if (conta.getSaldo() >= valorCompra) {
-                            Banco.transferir(conta, loja.getConta(), valorCompra);
-                            System.out.println(nome + " realizou uma compra de R$" + valorCompra + " na loja " + loja.getNome());
+     boolean comprou = false;
+      while (true) {
+     double valorCompra = VALORES_COMPRA[random.nextInt(VALORES_COMPRA.length)]; 
+     if (conta.getSaldo() >= valorCompra) {
+       comprou = true;
+      for (Loja loja : lojas) {
+            synchronized (loja.getConta()) {
+         if (conta.getSaldo() >= valorCompra) {
+          Banco.transferir(conta, loja.getConta(), valorCompra);
+                System.out.println(nome + " realizou uma compra de R$" + valorCompra + " na loja " + loja.getNome());
                         }
                     }
                 }
